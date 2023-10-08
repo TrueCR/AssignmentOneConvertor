@@ -1,0 +1,98 @@
+<!--
+Weight, Distance, Temperature Convertor - CPRG-306-G Assignment 1
+
+
+Names: Julien Lam, Tyler Gettle
+Date: October 8, 2023
+
+Description:
+
+This is the main conversion website. What this does is shows a navigation bar
+that allows the User to choose between three tabs:
+    1. Weight
+    2. Distance
+    3. Temperature
+
+The User can click between tabs to their desired conversion. The User is also 
+given a text input to enter there values they wish to convert. As well as choose 
+which type of conversion they want via a dropdown menu. When they choose an option
+in this drop down menu, the conversion will automatically change to that and allows
+the User to see conversions for the other way. This is all done through a Convert
+button that sends the values to the script.js page.
+-->
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Assignment 1 - Convertor</title>
+    <link rel="stylesheet" href="/dist/output.css">
+    <script src="script.js"></script>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="bg-slate-800 text-white p-6">
+        <!-- Three buttons at the top that allow the User to swap between conversions -->
+        <div class="flex container mx-auto space-x-4 font-bold">
+            <button id="weightButton" onclick="showTab('weightTab')" class="bg-slate-900 hover:bg-slate-600 p-2 rounded">Weight</button>
+            <button id="distanceButton" onclick="showTab('distanceTab')" class="bg-slate-900 hover:bg-slate-600 p-2 rounded">Distance</button>
+            <button id="tempButton" onclick="showTab('tempTab')" class="bg-slate-900 hover:bg-slate-600 p-2 rounded">Temperature</button>
+        </div>
+    </nav>
+
+    <!-- Weight Tab -->
+    <div id="weightTab" class="container mx-auto mt-4">
+        <h1 class="text-2xl font-semibold">Weight Converter</h1>
+        <form>
+            <label for="weightValue">Enter value(s):</label>
+            <!-- Input for weight conversion -->
+            <input type="text" id="weightValue" class="border p-2 rounded" placeholder="ex: 1, 2, 3">
+            <!-- Selection to determine which conversion to do, in this case Pound to Kilogram, or Kilogram to Pound -->
+            <select id="weightRate" class="border p-2 rounded">
+                <option value="poundToKilogram">Pound to Kilogram</option>
+                <option value="kilogramToPound">Kilogram to Pound</option>
+            </select>
+            <!-- Button that when pressed, will convert the value entered to its converted rate -->
+            <button type="button" onclick="convertWeight()" class="bg-slate-900 hover:bg-slate-600 text-white p-2 rounded mt-8">Convert</button>
+        </form>
+        <p id="weightResult" class="mt-2"></p>
+    </div>
+
+    <!-- Distance Tab -->
+    <div id="distanceTab" class="container mx-auto mt-4 hidden">
+        <h1 class="text-2xl font-semibold">Distance Converter</h1>
+        <form>
+            <label for="distanceValue">Enter value(s):</label>
+            <!-- Input for distance conversion -->
+            <input type="text" id="distanceValue" class="border p-2 rounded" placeholder="ex: 1, 2, 3">
+            <!-- Selection to determine which conversion to do, in this case Mile to Kilometer, or Kilometer to Mile -->
+            <select id="distanceRate" class="border p-2 rounded">
+                <option value="mileToKilometer">Mile to Kilometer</option>
+                <option value="kilometerToMile">Kilometer to Mile</option>
+            </select>
+            <!-- Button that when pressed, will convert the value entered to its converted rate -->
+            <button type="button" onclick="convertDistance()" class="bg-slate-900 hover:bg-slate-600 text-white p-2 rounded mt-8">Convert</button>
+        </form>
+        <p id="distanceResult" class="mt-2"></p>
+    </div>
+
+    <!-- Temperature Tab -->
+    <div id="tempTab" class="container mx-auto mt-4 hidden">
+        <h1 class="text-2xl font-semibold">Temperature Converter</h1>
+        <form>
+            <label for="tempValue">Enter value(s):</label>
+            <!-- Input for temperature conversion -->
+            <input type="text" id="tempValue" class="border p-2 rounded" placeholder="ex: 1, 2, 3">
+            <!-- Selection to determine which conversion to do, in this case Celsius to Fahrenheit, or Fahrenheit to Celsius -->
+            <select id="tempRate" class="border p-2 rounded">
+                <option value="celsiusToFahrenheit">Celsius to Fahrenheit</option>
+                <option value="fahrenheitToCelsius">Fahrenheit to Celsius</option>
+            </select>
+            <!-- Button that when pressed, will convert the value entered to its converted rate -->
+            <button type="button" onclick="convertTemp()" class="bg-slate-900 hover:bg-slate-600 text-white p-2 rounded mt-8">Convert</button>
+        </form>
+        <p id="tempResult" class="mt-2"></p>
+    </div>
+
+</body>
+</html>
