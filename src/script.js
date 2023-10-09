@@ -94,27 +94,53 @@ const showTab = (tabId) => {
     });
 };
 
+// Splits the values entered by at the "," and enters them into an array, and then removes any trailing spaces. helper function.
+const valueParser = (initialValue) => {
+    const values = [];
+    const valueArray = initialValue.split(",");
+    for (const item of valueArray) {
+        values.push(parseFloat(item.trim()));
+    }
+    return values;
+}
+
+// This is a helper function to determine the type of conversion that will be undertaken
+const conversionSolver = (initialRate) => {
+    if (initialRate === "poundToKilogram") {
+        conversion = createConvertor("pound", "kilogram");
+    }
+    else if (initialRate === "kilogramToPound")
+    {
+        conversion = createConvertor("kilogram", "pound");
+    }
+    else if (initialRate === "mileToKilometer") {
+        conversion = createConvertor("mile", "kilometer");
+    } 
+    else if (initialRate === "kilometerToMile"){
+        conversion = createConvertor("kilometer", "mile");
+    }
+    else if (initialRate === "celsiusToFahrenheit") {
+        conversion = createConvertor("celsius", "fahrenheit");
+    } 
+    else if ("fahrenheitToCelsius"){
+        conversion = createConvertor("fahrenheit", "celsius");
+    }
+    return conversion;
+}
+
+
 // This function will convert the value from either Pounds to Kilograms or Kilograms to Pounds, it will then display the result of the conversion
 const convertWeight = () => {
     // These two variables will take the value from the entered text, and take the rate the User determines
     const weightValue = document.getElementById("weightValue").value;
     const weightRate = document.getElementById("weightRate").value;
 
-    const values = [];
-    // Splits the values entered by at the "," and enters them into an array, and then removes any trailing spaces
-    const valueArray = weightValue.split(",");
-    for (const item of valueArray) {
-        values.push(parseFloat(item.trim()));
-    }
-
+    const values = valueParser(weightValue);
+ 
     /* Determines the rate if its Pounds to Kilograms, or Kilograms to Pounds and then 
     enters them into the createConvertor function to enable the correct conversion */
-    let conversion;
-    if (weightRate === "poundToKilogram") {
-        conversion = createConvertor("pound", "kilogram");
-    } else {
-        conversion = createConvertor("kilogram", "pound");
-    }
+    let conversion = conversionSolver(weightRate);
+  
     
     // Takes the result from the createConvertor function and puts it into a result variable
     const result = conversion(values);
@@ -129,22 +155,11 @@ const convertDistance = () => {
     const distanceValue = document.getElementById("distanceValue").value;
     const distanceRate = document.getElementById("distanceRate").value;
 
-    const values = [];
-    // Splits the values entered by at the "," and enters them into an array, and then removes any trailing spaces
-    const valueArray = distanceValue.split(",");
-    for (const item of valueArray) {
-        values.push(parseFloat(item.trim()));
-    }
-
+    const values = valueParser(distanceValue);
+  
     /* Determines the rate if its Miles to Kilometers, or Kilometers to Miles and then 
     enters them into the createConvertor function to enable the correct conversion */
-    let conversion;
-    if (distanceRate === "mileToKilometer") {
-        conversion = createConvertor("mile", "kilometer");
-    } 
-    else {
-        conversion = createConvertor("kilometer", "mile");
-    }
+    let conversion = conversionSolver(distanceRate);
 
     // Takes the result from the createConvertor function and puts it into a result variable
     const result = conversion(values);
@@ -159,23 +174,12 @@ const convertTemp = () => {
     const tempValue = document.getElementById("tempValue").value;
     const tempRate = document.getElementById("tempRate").value;
 
-    const values = [];
-    // Splits the values entered by at the "," and enters them into an array, and then removes any trailing spaces
-    const valueArray = tempValue.split(",");
-    for (const item of valueArray) {
-        values.push(parseFloat(item.trim()));
-    }
-
+    const values = valueParser(tempValue);
+   
     /* Determines the rate if its Miles to Kilometers, or Kilometers to Miles and then 
     enters them into the createConvertor function to enable the correct conversion */
-    let conversion;
-    if (tempRate === "celsiusToFahrenheit") {
-        conversion = createConvertor("celsius", "fahrenheit");
-    } 
-    else {
-        conversion = createConvertor("fahrenheit", "celsius");
-    }
-
+    let conversion = conversionSolver (tempRate);
+  
     // Takes the result from the createConvertor function and puts it into a result variable
     const result = conversion(values);
 
